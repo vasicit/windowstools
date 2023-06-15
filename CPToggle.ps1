@@ -12,7 +12,7 @@ $valueName    = "NoControlPanel"
 
 # Create the key if it does not exist
 If (-NOT (Test-Path $registryPath)) {
-  New-Item -Path $registryPath -Force
+  New-Item -Path $registryPath -Force | Out-Null
   New-ItemProperty -Path $registryPath -Name $valueName -Value 0 -PropertyType DWORD -Force
 }  
 
