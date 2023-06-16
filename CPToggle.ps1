@@ -1,3 +1,7 @@
+# This tool toggles the current non-Admin users access to Windows Settings ON and OFF
+# It can be invoked straight from the web by executing:
+# iex (iwr -useb https://raw.githubusercontent.com/vasicit/windowstools/main/CPToggle.ps1)
+
 # Get all users
 $users = Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty UserName
 
@@ -5,7 +9,7 @@ $users = Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProper
 $username = $users | Out-GridView -Title 'Please select a user' -OutputMode Single
 
 # Set variables to indicate value and key to set
-$usercid = (New-Object System.Security.Principal.NTAccount($username)).Translate([System.Security.Principal.SecurityIdentifier]).Value
+$usercid = (New-Object System.Securityiex (iwr -useb https://raw.githubusercontent.com/vasicit/windowstools/main/CPToggle.ps1)Principal.NTAccount($username)).Translate([System.Security.Principal.SecurityIdentifier]).Value
 #Write-Host "User CID is: $usercid"
 $registryPath = "REGISTRY::HKEY_USERS\$usercid\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
 $valueName    = "NoControlPanel"
